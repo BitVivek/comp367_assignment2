@@ -17,5 +17,15 @@
   </dependencies>
   <build>
     <finalName>vivek-comp367-webapp</finalName>
+	 <plugin>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>9.4.44.v20210927</version>
+            <configuration>
+                <httpConnector>
+                    <port>8081</port> <!-- Change this port -->
+                </httpConnector>
+            </configuration>
+        </plugin>
   </build>
 </project>
