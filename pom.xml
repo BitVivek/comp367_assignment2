@@ -7,6 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>vivek-comp367-webapp Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -15,17 +16,20 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
   <build>
     <finalName>vivek-comp367-webapp</finalName>
-	 <plugin>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.4.44.v20210927</version>
-            <configuration>
-                <httpConnector>
-                    <port>8081</port> <!-- Change this port -->
-                </httpConnector>
-            </configuration>
-        </plugin>
+    <plugins> <!-- Added plugins section -->
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.4.44.v20210927</version>
+        <configuration>
+          <httpConnector>
+            <port>8081</port>
+          </httpConnector>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>
