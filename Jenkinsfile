@@ -14,7 +14,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo "Deploying the web app..."
-                mvn jetty:run
+                sh 'mvn jetty:run -Djetty.http.port=8081'
                 echo "App Deployed at 8081"
             }
         }
