@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        DOCKER_HOST = 'tcp://localhost:2375'
         DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials')
         DOCKERHUB_USERNAME = "${DOCKERHUB_CREDENTIALS_USR}"
         DOCKERHUB_PASSWORD = "${DOCKERHUB_CREDENTIALS_PSW}"
