@@ -1,23 +1,36 @@
 pipeline {
     agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials')
+        DOCKERHUB_USERNAME = "${DOCKERHUB_CREDENTIALS_USR}"
+        DOCKERHUB_PASSWORD = "${DOCKERHUB_CREDENTIALS_PSW}"
+        IMAGE_NAME = 'vivekcente/vivek-comp367-webapp'
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 git 'https://github.com/BitVivek/comp367_assignment2.git'
             }
         }
-        stage('Build') {
+        stage('Docker Build') {
             steps {
-                sh 'mvn clean package'
+                echo "Building Docker image..."
+                sh "docker build -t ${IMAGE_NAME}:latest ."
             }
         }
-        stage('Deploy') {
+        stage('Docker Login') {
             steps {
-                echo "Deploying the web app..."
-                sh 'mvn jetty:run -Djetty.http.port=8081 &'
-                echo "App Deployed at 8081"
+                echo "Logging in to Docker Hub..."
+                sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                echo "Pushing Docker image to Docker Hub..."
+                sh "docker push ${IMAGE_NAME}:latest"
             }
         }
     }
 }
-
